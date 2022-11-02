@@ -1,14 +1,16 @@
+library(tidyverse)
 library(raster)
 library(ambient)
 library(foreach)
 library(doParallel)
-library(tidyverse)
 
 source("scripts/util.R")
 
 size <- 1001 # in px
 w    <- 1 / size
 
+# consistency
+set.seed(1234)
 # add 1 to force positive values
 my_perlin <- (noise_perlin(c(size, size))+1) %>%
   raster()
