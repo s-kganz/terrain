@@ -23,9 +23,10 @@ get_evans_young_fit <- function(z, w=1) {
   s <- (z[3]+z[7]-z[1]-z[9]) / (4*w^2)
   p <- (z[3]+z[6]+z[9]-z[1]-z[4]-z[7]) / (6*w)
   q <- (z[1]+z[2]+z[3]-z[7]-z[8]-z[9]) / (6*w)
+  u <- 1/9 * (2*(z[2]+z[4]+z[6]+z[8]) - (z[1]+z[3]+z[7]+z[9]) + 5*z[5])
   
   list(
-    r=r, t=t, s=s, p=p, q=q
+    r=r, t=t, s=s, p=p, q=q, u=u
   )
 }
 
@@ -79,6 +80,7 @@ render_evans_young_fit <- function(z, w=1) {
   s <- partials$s
   p <- partials$p
   q <- partials$q
+  u <- partials$u
   
   # The valid range of the polynomial is *always* [-1, 1] for both x
   # and y axes.
@@ -91,7 +93,7 @@ render_evans_young_fit <- function(z, w=1) {
     for (j in 1:length(y_surf)) {
       # Note flip of j and i here since y is our "row" on the surface.
       z_surf[j, i] <- r*x_surf[i]^2/2 + t*y_surf[j]^2/2 + s*x_surf[i]*y_surf[j] +
-        p*x_surf[i] + q*y_surf[j] + z[5]
+        p*x_surf[i] + q*y_surf[j] + u
     }
   }
   
@@ -113,8 +115,8 @@ render_evans_young_fit <- function(z, w=1) {
 }
 
 # Test surface
-# z1 <- c(1, 1, 1,
-#         1, 3, 1,
-#         1, 1, 1)
+# z1 <- c(1, 4, 4,
+#         3, 3, 4,
+#         3, 4, 5)
 # 
-# render_evans_young_fit(z1)
+# p <- render_evans_young_fit(z1)
