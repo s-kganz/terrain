@@ -115,8 +115,8 @@ render_evans_young_fit <- function(z, w=1) {
 }
 
 # Test surface
-# z1 <- c(1, 4, 4,
-#         3, 3, 4,
-#         3, 4, 5)
-# 
-# p <- render_evans_young_fit(z1)
+z1 <- c(1, 4, 4,
+        3, 3, 4,
+        3, 4, 5)
+
+p <- render_evans_young_fit(z1)
